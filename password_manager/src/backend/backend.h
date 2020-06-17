@@ -112,8 +112,6 @@ void Backend::modify_credential(){
     cout << "Enter title to modify (Case Sensitive): ";
     cin >> title_input;
 
-    cout << "Title found at position: " << Backend::search(title_input) << endl;
-
     if(Backend::search(title_input) == -1){
         cout << "Title not found. Try again." << endl;
         return;
@@ -149,6 +147,9 @@ void Backend::delete_credential(){
         }
 
         Backend::database_array.pop_back(); // Removes last element of the array.
+
+        cout << "Credential has been deleted." << endl;
+
     }
 
 };
