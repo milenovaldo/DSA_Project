@@ -90,6 +90,7 @@ void route(int selection_input, Backend backend_obj){
 		/* Search a credential */
 		backend_obj.load_database();
 		backend_obj.search_credential();
+		backend_obj.save_database();
 		break;
 	case 5:
 		/* Exit program*/

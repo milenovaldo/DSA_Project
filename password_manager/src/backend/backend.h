@@ -161,7 +161,9 @@ void Backend::delete_credential(){
 
 // Search for a credential by providing a title
 void Backend::search_credential(){
-    string title_input, title, username, password, credential_to_parse;
+    string title_input, title, username, password, credential_to_parse = "";
+
+    Backend::parsed_credentials.clear();
     
     cout << "Enter a title to search (Case Sensitive): ";
     cin >> title_input;
