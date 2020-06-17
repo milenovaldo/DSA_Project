@@ -99,6 +99,11 @@ void Backend::add_credential(){
     cout << "Enter a password: ";
     cin >> password;
 
+    if(title == "" || title == " "){
+        cout << "A title is required. Try again." << endl;
+        return;
+    }
+
     string string_to_append = title + ":" + username + ":" + password + ":";
     Backend::database_array.push_back(string_to_append);
 };
