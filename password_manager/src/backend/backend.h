@@ -134,18 +134,21 @@ void Backend::modify_credential(){
 // Delete a credential by providing a title
 void Backend::delete_credential(){
     string title_input;
+    int result_index;
 
     cout << "Enter title to delete (Case Sensitive): ";
     cin >> title_input;
 
+    result_index = Backend::search(title_input);
+
     // erase element
-    if(Backend::search(title_input) == -1){
+    if(result_index == -1){
         cout << "Title not found. Try again." << endl;
         return;
     }else{
         int new_array_size = Backend::database_array.size() - 1;
 
-        int start_position = Backend::search(title_input);
+        int start_position = result_index;
 
         for(int position = start_position; position < new_array_size; position++){
             Backend::database_array[position] = Backend::database_array[position + 1];
@@ -168,13 +171,20 @@ void Backend::search_credential(){
     cout << "Enter a title to search (Case Sensitive): ";
     cin >> title_input;
 
-    credential_to_parse =  Backend::database_array[search(title_input)];
+    int index = Backend::search(title_input);
 
-    if(Backend::search(title_input) == -1){
+    credential_to_parse =  Backend::database_array[index];
+
+    if(index == -1){
         cout << "Title not found. Try again." << endl;
         return;
     }else{
         Backend::parse_credential(credential_to_parse, ":");
+
+        if(credential_to_parse == "" || credential_to_parse == " "){
+            cout << "Title not found. Try again." << endl;
+            return;
+        }
 
         title = Backend::parsed_credentials[0];
         username = Backend::parsed_credentials[1];
