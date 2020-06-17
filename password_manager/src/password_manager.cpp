@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : password_manager.cpp
-// Author      : Mileno, Sunny, Calvin
-// Version     : 0.0.1
+// Author      : Mileno Valdo, Sunny Jovita, Calvin Scorpiano
+// Version     : 1.0
 // Copyright   : Open source, baby
 // Description : Password Manager in C++ that is kind of secure 
 //				 but is free forever.
@@ -43,6 +43,7 @@ string hash_input(string input_master_to_hash){
 	if (guid_file.is_open()){
 		getline(guid_file, salt);
 	}
+
 	guid_file.close();
 	hashed_master = mid_square(mid_square(salt) + input_master_to_hash);
 	return hashed_master;
@@ -68,19 +69,32 @@ void route(int selection_input, Backend backend_obj){
 	switch (selection_input)
 	{
 	case 1:
+		/* Add Credential */
 		backend_obj.load_database();
+		backend_obj.add_credential();
+		backend_obj.save_database();
 		break;
 	case 2:
 		/* Modify Credential */
+		backend_obj.load_database();
+		backend_obj.modify_credential();
+		backend_obj.save_database();
 		break;
 	case 3:
 		/* Delete a credential */
+		backend_obj.load_database();
+		backend_obj.delete_credential();
+		backend_obj.save_database();
 		break;
 	case 4: 
 		/* Search a credential */
+		backend_obj.load_database();
+		backend_obj.search_credential();
 		break;
 	case 5:
 		/* Exit program*/
+		cout << "Exiting program" << endl;
+		exit(0);
 		break;
 
 	default:
@@ -123,5 +137,3 @@ int main(int argc, char *argv[]){
 
 	return 0;
 }
-
-// Compile command: cd "c:\Users\Administrator.DESKTOP-T76HNM8\Desktop\cpp_project\password_manager\src\" ; if ($?) { g++ backend/sha256.cpp password_manager.cpp -o password_manager } ; if ($?) { .\password_manager }
