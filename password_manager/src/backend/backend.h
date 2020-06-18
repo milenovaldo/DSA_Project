@@ -89,20 +89,23 @@ void Backend::add_credential(){
     string title;
     string username;
     string password;
+    bool empty_title = true;
 
-    cout << "Enter a title: ";
-    cin >> title;
+    while(empty_title){
+        getline(cin, title);
+        if (title.empty()){
+            cout << "Title cannot be empty" << endl;    
+            cout << "Enter a title: ";
+        }else{
+            empty_title = false;
+        }
+    }
 
     cout << "Enter a username: ";
     cin >> username;
 
     cout << "Enter a password: ";
     cin >> password;
-
-    if(title == "" || title == " "){
-        cout << "A title is required. Try again." << endl;
-        return;
-    }
 
     if(Backend::search(title) != -1){
         cout << "Duplicate title. Try another one." << endl;
