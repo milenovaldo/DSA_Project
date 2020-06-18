@@ -104,8 +104,13 @@ void Backend::add_credential(){
         return;
     }
 
-    string string_to_append = title + ":" + username + ":" + password + ":";
-    Backend::database_array.push_back(string_to_append);
+    if(Backend::search(title) != -1){
+        cout << "Duplicate title. Try another one." << endl;
+        return;
+    }else{
+        string string_to_append = title + ":" + username + ":" + password + ":";
+        Backend::database_array.push_back(string_to_append);    
+    }
 };
 
 // Modify a credential
